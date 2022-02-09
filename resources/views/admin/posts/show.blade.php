@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 
+
 @section('title')
  | {{$post->title}}
 @endsection
@@ -16,6 +17,13 @@
   <h1 class="py-3">{{$post->title}}</h1>
   <h4>
     Categoria - <strong>{{$post->category->name}}</strong>
+  </h4>
+  <h4>
+    @forelse ($post->tags as $tag)
+      <span class="badge rounded-pill bg-success text-light">{{$tag->name}}</span>
+    @empty
+      n/a
+    @endforelse
   </h4>
   <p>
     {{$post->content}}

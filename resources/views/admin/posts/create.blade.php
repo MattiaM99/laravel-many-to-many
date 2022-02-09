@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 
+
 @section('title')
  | Crea nuovo post
 @endsection
@@ -50,7 +51,7 @@
     <div class="mb-3">
       <label for="title" class="form-label">Categoria</label>
       <select name="category_id" id="category_id" class="form-control">
-        <option>Seleziona</option>
+        <option value="">Seleziona</option>
         @foreach ($categories as $cat)
           <option 
           @if ($cat->id == old('category_id'))
@@ -59,6 +60,20 @@
           value="{{$cat->id}}">{{$cat->name}}</option>
         @endforeach
       </select>
+    </div>
+
+    <div class="mb-3">
+      Seleziona i tag del post
+      @foreach ($tags as $tag)
+        <div>
+          <input type="checkbox" name="tags[]" value="{{$tag->id}}" id="tag{{$tag->id}}"
+          @if (in_array($tag->id, old('tags', [])))
+            checked
+          @endif>
+          <label style="cursor: pointer" 
+          for="tag{{$tag->id}}">{{$tag->name}}</label>
+        </div>
+      @endforeach
     </div>
 
     <button type="submit" class="btn btn-primary">Invia</button>
